@@ -15,6 +15,8 @@
 [![Languages](https://img.shields.io/badge/UI%20Languages-English%20%7C%20%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9-00BFA5?style=flat-square)](#key-features)
 [![License](https://img.shields.io/badge/License-MIT-success?style=flat-square)](LICENSE)
 
+🌐 **English** · **[العربية (الشرح الكامل)](README.ar.md)**
+
 [Overview](#overview) · [Screenshots](#screenshots) · [Features](#key-features) · [Requirements](#requirements) · [Quick Start](#installation--quick-start) · [Run from Source](#running-from-source-developers) · [Architecture](#architecture) · [Developer](#developer--contact)
 
 </div>
@@ -38,6 +40,8 @@ Unlike basic interface counters, NetScope combines physical network adapter tele
 - **تحليل شامل للتطبيقات:** استعراض الاستهلاك حسب اليوم، الأمس، آخر 7 أيام، الأسبوع، الشهر، السنة، أو فترة مخصصة، مع فحص الاتصالات النشطة (`TCP/UDP`) ومسار الملف التنفيذي لكل تطبيق.
 - **خفيف ويعمل في الخلفية:** خدمة مراقبة مستقلة (`NetScopeService`) تعمل في شريط النظام (`System Tray`) مع تنبيهات الحصص اليومية/الشهرية والتطبيقات الجديدة.
 - **يدعم العربية والإنجليزية:** واجهة عصرية تدعم الاتجاهين (`RTL / LTR`) مع 3 أوضاع للمظهر (**داكن**، **فاتح**، و**تلقائي حسب النظام**).
+
+[📖 اقرأ الدليل العربي الكامل مع المتطلبات وطريقة التثبيت والأوامر (README.ar.md)](README.ar.md)
 
 </div>
 
@@ -278,7 +282,9 @@ NetScope/
 ├── NetScope.spec                # PyInstaller spec for NetScope.exe & NetScopeService.exe
 ├── install_service.bat          # Native Windows Service installer
 ├── uninstall_service.bat        # Native Windows Service uninstaller
-└── LICENSE                      # MIT License
+├── LICENSE                      # MIT License
+├── README.md                    # English documentation
+└── README.ar.md                 # Full Arabic documentation (الوثائق بالعربية)
 ```
 
 ---
