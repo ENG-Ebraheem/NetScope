@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetScope - Windows Internet Usage Monitor</title>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body {
+      background-color: #0b0f19;
+      color: #ffffff;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #splash-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 40%, #131b2e 0%, #0b0f19 80%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+      z-index: 99999;
+      pointer-events: none;
+    }
+    .logo-box {
+      position: relative;
+      width: 84px;
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+    .pulse-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 26px;
+      border: 2px solid rgba(0, 229, 255, 0.4);
+      animation: pulse 2.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+    .pulse-ring-2 {
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      border-radius: 30px;
+      border: 1px solid rgba(124, 77, 255, 0.25);
+      animation: pulse 2.2s infinite cubic-bezier(0.4, 0, 0.6, 1) 0.6s;
+    }
+    .logo-card {
+      width: 68px;
+      height: 68px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(124, 77, 255, 0.15));
+      border: 1.5px solid rgba(0, 229, 255, 0.5);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 35px rgba(0, 229, 255, 0.25);
+      backdrop-filter: blur(10px);
+    }
+    .logo-card svg {
+      width: 38px;
+      height: 38px;
+      fill: #00e5ff;
+      filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.6));
+    }
+    .app-title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #ffffff 10%, #00e5ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .app-subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 26px;
+      letter-spacing: 0.3px;
+    }
+    .loader-track {
+      width: 200px;
+      height: 3.5px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .loader-bar {
+      position: absolute;
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, #7c4dff, #00e5ff);
+      border-radius: 999px;
+      animation: progress-indet 1.4s infinite ease-in-out;
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.92); opacity: 0.8; }
+      50% { transform: scale(1.14); opacity: 0.15; }
+      100% { transform: scale(0.92); opacity: 0.8; }
+    }
+    @keyframes progress-indet {
+      0% { left: -40%; width: 30%; }
+      50% { left: 30%; width: 50%; }
+      100% { left: 100%; width: 30%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="splash-container">
+    <div class="logo-box">
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring-2"></div>
+      <div class="logo-card">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="app-title">NetScope</div>
+    <div class="app-subtitle">Windows Internet Usage Monitor</div>
+    <div class="loader-track">
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+
+  <script>
+    // Remove splash smoothly as soon as Flutter renders first frame or flutter-view mounts
+    function hideSplash() {
+      var splash = document.getElementById('splash-container');
+      if (splash && splash.style.opacity !== '0') {
+        splash.style.opacity = '0';
+        splash.style.transform = 'scale(0.98)';
+        setTimeout(function() {
+          if (splash && splash.parentNode) splash.parentNode.removeChild(splash);
+        }, 360);
+      }
+    }
+
+    window.addEventListener('flutter-first-frame', hideSplash);
+
+    // MutationObserver fallback to catch when <flutter-view> or <flt-glass-pane> is added
+    var observer = new MutationObserver(function(mutations, obs) {
+      if (document.querySelector('flutter-view') || document.querySelector('flt-glass-pane')) {
+        setTimeout(hideSplash, 100);
+        obs.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Maximum failsafe timeout of 2.5s
+    setTimeout(hideSplash, 2500);
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

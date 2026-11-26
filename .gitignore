@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Databases & local logs
+*.db-wal
+*.db-shm
+**/database/netscope.db
+**/tests/test_netscope.db
+**/logs/*.log
+stdout.txt
+stderr.txt
+monitor_engine/test_icon_preview.png
+monitor_engine/icons/*.png
+
+# PyInstaller & Installer build outputs
+dist/
+build/
+builds/
+*.exe
+*.spec.bak
+installer/build/
+installer/dist/
+installer/netscope_dist.zip
+
+# Flutter / Dart
+app/.dart_tool/
+app/.packages
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/build/
+app/.pub-cache/
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.user
